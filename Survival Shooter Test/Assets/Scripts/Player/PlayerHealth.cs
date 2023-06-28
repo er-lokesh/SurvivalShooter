@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDataPersistence
 {
     public int startingHealth = 100;
     public Slider healthSlider;
@@ -84,5 +84,18 @@ public class PlayerHealth : MonoBehaviour
     public void RestartLevel ()
     {
         SceneManager.LoadScene (0);
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.currentHealth = data.playerHealthData.currentHealth;
+        healthSlider.value = currentHealth;
+        Debug.Log("Load Player health :: " + currentHealth);
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerHealthData.currentHealth = this.currentHealth;
+        Debug.Log("Save Player health :: " + currentHealth);
     }
 }
