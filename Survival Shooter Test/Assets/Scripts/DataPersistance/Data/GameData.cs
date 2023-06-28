@@ -8,11 +8,13 @@ public class GameData
 {
     public PlayerHealthData playerHealthData;
     public PlayerMovementData playerMovementData;
+    public CameraPositionData cameraPositionData;
 
     public GameData()
     {
         playerHealthData = new PlayerHealthData();
         playerMovementData = new PlayerMovementData();
+        cameraPositionData = new CameraPositionData();
     }
 }
 
@@ -37,5 +39,16 @@ public class PlayerMovementData
     {
         position = Vector3.zero;
         rotation = Quaternion.identity;
+    }    
+}
+
+[Serializable]
+public class CameraPositionData
+{
+    public Vector3 position;
+    
+    public CameraPositionData()
+    {
+        position = new Vector3(1, 15, -22);
     }    
 }
