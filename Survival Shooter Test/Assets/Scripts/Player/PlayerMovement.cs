@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
  
 	public float speed = 6f;
@@ -57,4 +57,15 @@ public class PlayerMovement : MonoBehaviour
 		animator.SetBool("IsWalking", walking);
 	}
 
+    public void LoadData(GameData data)
+    {
+		transform.position = data.playerMovementData.position;
+		transform.rotation = data.playerMovementData.rotation;
+	}
+
+	public void SaveData(GameData data)
+	{
+		data.playerMovementData.position = transform.position;
+		data.playerMovementData.rotation = transform.rotation;
+	}
 }

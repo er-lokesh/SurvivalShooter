@@ -90,12 +90,11 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
     {
         this.currentHealth = data.playerHealthData.currentHealth;
         healthSlider.value = currentHealth;
-        Debug.Log("Load Player health :: " + currentHealth);
     }
 
     public void SaveData(GameData data)
     {
+        if (currentHealth <= 0) currentHealth = startingHealth;
         data.playerHealthData.currentHealth = this.currentHealth;
-        Debug.Log("Save Player health :: " + currentHealth);
     }
 }

@@ -7,10 +7,12 @@ using UnityEngine;
 public class GameData
 {
     public PlayerHealthData playerHealthData;
+    public PlayerMovementData playerMovementData;
 
     public GameData()
     {
         playerHealthData = new PlayerHealthData();
+        playerMovementData = new PlayerMovementData();
     }
 }
 
@@ -22,6 +24,18 @@ public class PlayerHealthData
     public PlayerHealthData()
     {
         currentHealth = 100;
-    }
-    
+    }    
+}
+
+[Serializable]
+public class PlayerMovementData
+{
+    public Vector3 position;
+    public Quaternion rotation;
+
+    public PlayerMovementData()
+    {
+        position = Vector3.zero;
+        rotation = Quaternion.identity;
+    }    
 }
