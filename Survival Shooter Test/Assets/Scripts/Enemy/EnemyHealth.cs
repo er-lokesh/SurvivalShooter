@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDataPersistence
 {
     public int startingHealth = 100;
     public float sinkSpeed = 2.5f;
@@ -15,7 +16,9 @@ public class EnemyHealth : MonoBehaviour
     bool isSinking;
     int currentHealth;
 
-    public int CurrentHealth { get { return currentHealth; } }
+    public EnemyType enemyType;
+
+    public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
     void Awake ()
     {
@@ -75,5 +78,25 @@ public class EnemyHealth : MonoBehaviour
         isSinking = true;
         ScoreManager.score += scoreValue;
         Destroy (gameObject, 2f);
+    }
+
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(GameData data)
+    {
+        EnemyData enemyData = new EnemyData()
+        {
+            currentHealth = this.currentHealth,
+            position = transform.position,
+            rotation = transform.rotation
+        };
+
+        if (!data.enemyDictData.ContainsKey(enemyType))
+            data.enemyDictData.Add(enemyType, new List<EnemyData>());
+        
+        data.enemyDictData[enemyType].Add(enemyData);
     }
 }

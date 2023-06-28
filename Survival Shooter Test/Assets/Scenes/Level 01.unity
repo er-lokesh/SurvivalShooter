@@ -2943,7 +2943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1694342407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,6 +2961,7 @@ MonoBehaviour:
   spawnTime: 3
   spawnPoints:
   - {fileID: 1109112108}
+  enemyType: 1
 --- !u!4 &1694342408
 Transform:
   m_ObjectHideFlags: 0
@@ -2993,6 +2994,7 @@ MonoBehaviour:
   spawnTime: 10
   spawnPoints:
   - {fileID: 1256207237}
+  enemyType: 2
 --- !u!114 &1694342410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3010,6 +3012,7 @@ MonoBehaviour:
   spawnTime: 3
   spawnPoints:
   - {fileID: 1631387988}
+  enemyType: 0
 --- !u!1 &1702276209
 GameObject:
   m_ObjectHideFlags: 0
