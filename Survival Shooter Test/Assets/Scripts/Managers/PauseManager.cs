@@ -33,7 +33,13 @@ public class PauseManager : MonoBehaviour {
 		Lowpass ();
 		
 	}
-	
+
+	public void Save()
+    {
+
+		Quit();
+	}
+
 	void Lowpass()
 	{
 		if (Time.timeScale == 0)
