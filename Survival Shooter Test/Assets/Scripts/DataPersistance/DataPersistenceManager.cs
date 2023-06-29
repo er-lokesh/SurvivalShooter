@@ -72,11 +72,4 @@ public class DataPersistenceManager : MonoBehaviour
         fileDataHandler.Save(gameData);
         Debug.Log("Saved data succesfully");
     }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
-
 }

@@ -50,6 +50,7 @@ public class EnemyManager : MonoBehaviour, IDataPersistence
         if (data.enemyDictData.Count > 0)
         {
             enemyDataList = data.enemyDictData[enemyType];
+            var lastEnemyId = -1;
             if (enemyDataList != null && enemyDataList.Count > 0)
             {
                 foreach (var enemyData in enemyDataList)
@@ -60,11 +61,12 @@ public class EnemyManager : MonoBehaviour, IDataPersistence
                     var enemyHealth = enemyObj.GetComponent<EnemyHealth>();
                     enemyHealth.CurrentHealth = enemyData.currentHealth;
                     enemyHealth.enemyId = enemyData.id;
-
+                    lastEnemyId = enemyData.id;
                     enemyStackData.AddEntity(enemyType, new EnemyEntity() { id = enemyData.id, currentHealth = enemyData.currentHealth, position = enemyData.position, rotation = enemyData.rotation });
                     enemyHealth.OnEnemyDead += OnEnemyDead;
                     enemyHealthData.Add(enemyHealth);
                 }
+                enemyId = ++lastEnemyId;
             }
         }
     }

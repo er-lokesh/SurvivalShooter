@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class GameData
@@ -8,16 +7,16 @@ public class GameData
     public PlayerHealthData playerHealthData;
     public PlayerMovementData playerMovementData;
     public CameraPositionData cameraPositionData;
+    public ScoreData scoreData;
     public Dictionary<EnemyType, List<EnemyEntity>> enemyDictData;
-    //public SerializableDictionary<EnemyType, List<EnemyEntity>> enemyDictData;
-
+    
     public GameData()
     {
         playerHealthData = new PlayerHealthData();
         playerMovementData = new PlayerMovementData();
         cameraPositionData = new CameraPositionData();
+        scoreData = new ScoreData();
         enemyDictData = new Dictionary<EnemyType, List<EnemyEntity>>();
-        //enemyDictData = new SerializableDictionary<EnemyType, List<EnemyEntity>>();
     }
 }
 
@@ -37,32 +36,30 @@ public class PlayerMovementData
 {
     public SerializableVector3 position;
     public SerializableVector3 rotation;
-    //public Vector3 position;
-    //public Quaternion rotation;
-
+    
     public PlayerMovementData()
     {
         position = new SerializableVector3();
         rotation = new SerializableVector3();
-        //position = Vector3.zero;
-        //rotation = Quaternion.identity;
     }    
+}
+
+[Serializable]
+public class ScoreData
+{
+    public int score;
 }
 
 [Serializable]
 public class CameraPositionData
 {
     public SerializableVector3 position;
-    //public Vector3 position;
     
     public CameraPositionData()
     {
         position = new SerializableVector3(1, 15, -22);
-        //position = new Vector3(1, 15, -22);
     }    
 }
-
-
 
 [Serializable]
 public class EnemyEntity
@@ -70,16 +67,12 @@ public class EnemyEntity
     public int id;
     public SerializableVector3 position;
     public SerializableVector3 rotation;
-    //public Vector3 position;
-    //public Quaternion rotation;
     public int currentHealth;
 
     public EnemyEntity()
     {
         position = new SerializableVector3();
         rotation = new SerializableVector3();
-        //position = Vector3.zero;
-        //rotation = Quaternion.identity;
         currentHealth = 100;
     }
 }

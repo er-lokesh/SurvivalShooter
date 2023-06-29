@@ -36,8 +36,8 @@ public class PauseManager : MonoBehaviour {
 
 	public void Save()
     {
-
-		Quit();
+		DataPersistenceManager.instance.SaveGame();
+		//Quit();
 	}
 
 	void Lowpass()
