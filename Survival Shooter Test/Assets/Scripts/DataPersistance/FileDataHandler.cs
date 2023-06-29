@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using UnityEngine;
@@ -32,7 +33,8 @@ public class FileDataHandler
                     }
                 }
 
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
+                //loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
             }
             catch (Exception e)
             {
@@ -53,7 +55,12 @@ public class FileDataHandler
                 Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
             }
 
-            string dataToStore = JsonUtility.ToJson(data, true);
+            string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            //Debug.Log(dataToStore);
+            //string dataToStore = JsonUtility.ToJson(data, true);
 
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {

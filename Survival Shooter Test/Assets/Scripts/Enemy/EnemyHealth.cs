@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IDataPersistence
+public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public float sinkSpeed = 2.5f;
@@ -15,8 +16,8 @@ public class EnemyHealth : MonoBehaviour, IDataPersistence
     bool isDead;
     bool isSinking;
     int currentHealth;
-
-    public EnemyType enemyType;
+    public Action<int> OnEnemyDead;
+    public int enemyId;
 
     public int CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
 
@@ -61,7 +62,7 @@ public class EnemyHealth : MonoBehaviour, IDataPersistence
     void Death ()
     {
         isDead = true;
-
+        OnEnemyDead?.Invoke(enemyId);
         capsuleCollider.isTrigger = true;
 
         anim.SetTrigger ("Dead");
@@ -69,7 +70,6 @@ public class EnemyHealth : MonoBehaviour, IDataPersistence
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
     }
-
 
     public void StartSinking ()
     {
@@ -80,23 +80,14 @@ public class EnemyHealth : MonoBehaviour, IDataPersistence
         Destroy (gameObject, 2f);
     }
 
-    public void LoadData(GameData data)
+    public EnemyEntity FetchEntity()
     {
-
-    }
-
-    public void SaveData(GameData data)
-    {
-        EnemyData enemyData = new EnemyData()
+        return new EnemyEntity()
         {
             currentHealth = this.currentHealth,
+            id = enemyId,
             position = transform.position,
             rotation = transform.rotation
         };
-
-        if (!data.enemyDictData.ContainsKey(enemyType))
-            data.enemyDictData.Add(enemyType, new List<EnemyData>());
-        
-        data.enemyDictData[enemyType].Add(enemyData);
     }
 }

@@ -8,14 +8,16 @@ public class GameData
     public PlayerHealthData playerHealthData;
     public PlayerMovementData playerMovementData;
     public CameraPositionData cameraPositionData;
-    public SerializableDictionary<EnemyType, List<EnemyData>> enemyDictData;
+    public Dictionary<EnemyType, List<EnemyEntity>> enemyDictData;
+    //public SerializableDictionary<EnemyType, List<EnemyEntity>> enemyDictData;
 
     public GameData()
     {
         playerHealthData = new PlayerHealthData();
         playerMovementData = new PlayerMovementData();
         cameraPositionData = new CameraPositionData();
-        enemyDictData = new SerializableDictionary<EnemyType, List<EnemyData>>();
+        enemyDictData = new Dictionary<EnemyType, List<EnemyEntity>>();
+        //enemyDictData = new SerializableDictionary<EnemyType, List<EnemyEntity>>();
     }
 }
 
@@ -69,4 +71,12 @@ public class EnemyData
         rotation = Quaternion.identity;
         currentHealth = 100;
     }
+}
+
+[System.Serializable]
+public class SerializableVector3
+{
+    public float x;
+    public float y;
+    public float z;
 }
