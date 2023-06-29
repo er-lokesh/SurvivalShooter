@@ -33,7 +33,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         currentHealth = startingHealth;
     }
 
-
     void Update ()
     {
         if(damaged)
@@ -46,7 +45,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         }
         damaged = false;
     }
-
 
     public void TakeDamage (int amount)
     {
@@ -64,7 +62,6 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
         }
     }
 
-
     void Death ()
     {
         isDead = true;
@@ -78,8 +75,9 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
 
         playerMovement.enabled = false;
         playerShooting.enabled = false;
-    }
 
+        DataPersistenceManager.instance.ClearGame();
+    }
 
     public void RestartLevel ()
     {
@@ -94,7 +92,13 @@ public class PlayerHealth : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
-        if (currentHealth <= 0) currentHealth = startingHealth;
+        //if (currentHealth <= 0) currentHealth = startingHealth;
         data.playerHealthData.currentHealth = this.currentHealth;
+    }
+
+    public void ClearData(GameData data)
+    {
+        this.currentHealth = startingHealth;
+        healthSlider.value = currentHealth;
     }
 }

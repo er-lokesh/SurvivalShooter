@@ -33,4 +33,9 @@ public class CameraFollow : MonoBehaviour, IDataPersistence
 		data.cameraPositionData.position = new SerializableVector3(transform.position.x, transform.position.y, transform.position.z);
         //data.cameraPositionData.position = transform.position;
     }
+
+    public void ClearData(GameData data)
+    {
+        transform.position = new Vector3(1, 15, -22);
+    }
 }

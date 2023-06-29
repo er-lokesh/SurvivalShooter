@@ -93,6 +93,13 @@ public class EnemyManager : MonoBehaviour, IDataPersistence
         data.enemyDictData[enemyType] = enemyStackData.FetchEntites(enemyType);
     }
 
+    public void ClearData(GameData data)
+    {
+        enemyId = 0;
+        enemyHealthData.ForEach(x=>Destroy(x.gameObject));
+        enemyStackData.ClearEntity(enemyType);
+    }
+
     //private void OnApplicationQuit()
     //{
     //    DataPersistenceManager.instance.SaveGame();

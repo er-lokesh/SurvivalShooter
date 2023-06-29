@@ -32,6 +32,11 @@ public class EnemyStackHandler : MonoBehaviour
         enemyStackDict[type] = entities;
     }
 
+    public void ClearEntity(EnemyType type)
+    {
+        enemyStackDict[type].Clear();
+    }
+
     public List<EnemyEntity> FetchEntites(EnemyType type)
     {
         if (!enemyStackDict.ContainsKey(type)) return null;

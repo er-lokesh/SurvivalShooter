@@ -72,4 +72,17 @@ public class DataPersistenceManager : MonoBehaviour
         fileDataHandler.Save(gameData);
         Debug.Log("Saved data succesfully");
     }
+
+    public void ClearGame()
+    {
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        {
+            dataPersistenceObj.ClearData(gameData);
+        }
+
+        fileDataHandler.Clear();
+        NewGame();
+
+        Debug.Log("Cleared data succesfully");
+    }
 }

@@ -45,7 +45,7 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(GameData data, string blank = "")
     {
         string fullPath = Path.Combine(dataDirName, dataFileName);
         try
@@ -55,10 +55,10 @@ public class FileDataHandler
                 Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
             }
 
-            string dataToStore = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
+            string dataToStore = JsonConvert.SerializeObject(data); //, Formatting.Indented, new JsonSerializerSettings
+            //{
+            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            //});
             //Debug.Log(dataToStore);
             //string dataToStore = JsonUtility.ToJson(data, true);
 
@@ -71,6 +71,32 @@ public class FileDataHandler
             }
         }
         catch(Exception e)
+        {
+            Debug.LogError("Error occured when save data to file : " + fullPath + "\n" + e);
+        }
+    }
+
+    public void Clear()
+    {
+        string fullPath = Path.Combine(dataDirName, dataFileName);
+        try
+        {
+            if (!Directory.Exists(fullPath))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+            }
+
+            string dataToStore = string.Empty;
+
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
+        }
+        catch (Exception e)
         {
             Debug.LogError("Error occured when save data to file : " + fullPath + "\n" + e);
         }

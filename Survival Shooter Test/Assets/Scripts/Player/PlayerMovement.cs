@@ -69,4 +69,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         data.playerMovementData.position = new SerializableVector3(transform.position.x, transform.position.y, transform.position.z);
         data.playerMovementData.rotation = new SerializableVector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
     }
+
+    public void ClearData(GameData data)
+    {
+		transform.position = Vector3.zero;
+		transform.rotation = Quaternion.identity;
+    }
 }

@@ -9,6 +9,11 @@ public class ScoreManager : MonoBehaviour, IDataPersistence
 
     Text text;
 
+    public void ClearData(GameData data)
+    {
+        score = 0;
+    }
+
     public void LoadData(GameData data)
     {
         score = data.scoreData.score; 
