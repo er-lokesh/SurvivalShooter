@@ -54,12 +54,14 @@ public class EnemyManager : MonoBehaviour, IDataPersistence
             {
                 foreach (var enemyData in enemyDataList)
                 {
-                    var enemyObj = Instantiate(enemy, enemyData.position, enemyData.rotation);
+                    Vector3 ePos = new Vector3(enemyData.position.x, enemyData.position.y, enemyData.position.z);
+                    Quaternion eRot = Quaternion.Euler(enemyData.rotation.x, enemyData.rotation.y, enemyData.rotation.z);
+                    var enemyObj = Instantiate(enemy, ePos, eRot);
                     var enemyHealth = enemyObj.GetComponent<EnemyHealth>();
                     enemyHealth.CurrentHealth = enemyData.currentHealth;
+                    enemyHealth.enemyId = enemyData.id;
 
                     enemyStackData.AddEntity(enemyType, new EnemyEntity() { id = enemyData.id, currentHealth = enemyData.currentHealth, position = enemyData.position, rotation = enemyData.rotation });
-                    enemyHealth.enemyId = enemyId++;
                     enemyHealth.OnEnemyDead += OnEnemyDead;
                     enemyHealthData.Add(enemyHealth);
                 }
@@ -69,18 +71,22 @@ public class EnemyManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        List<EnemyEntity> enemyEntities = new List<EnemyEntity>();
         foreach (var enemy in enemyHealthData)
         {
             EnemyEntity entity = new EnemyEntity()
             {
                 id = enemy.enemyId,
                 currentHealth = enemy.CurrentHealth,
-                position = enemy.transform.position,
-                rotation = enemy.transform.rotation
+                position = new SerializableVector3(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z),
+                rotation = new SerializableVector3(enemy.transform.rotation.x, enemy.transform.rotation.y, enemy.transform.rotation.z) 
+                //position = enemy.transform.position,
+                //rotation = enemy.transform.rotation
             };
 
-            enemyStackData.UpdateEntity(enemyType, entity);
+            enemyEntities.Add(entity);
         }
+        enemyStackData.UpdateEntity(enemyType, enemyEntities);
 
         data.enemyDictData[enemyType] = enemyStackData.FetchEntites(enemyType);
     }

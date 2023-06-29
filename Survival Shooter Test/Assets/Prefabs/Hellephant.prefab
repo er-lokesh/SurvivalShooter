@@ -10178,7 +10178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenAttacks: 0.5
-  attackDamage: 0
+  attackDamage: 10
 --- !u!114 &11415352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10195,7 +10195,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
-  enemyType: 0
+  enemyId: 0
 --- !u!1 &184534
 GameObject:
   m_ObjectHideFlags: 0

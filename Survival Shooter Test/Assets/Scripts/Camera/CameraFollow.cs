@@ -23,11 +23,14 @@ public class CameraFollow : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        transform.position = data.cameraPositionData.position;
+        var playerData = data.cameraPositionData;
+        transform.position = new Vector3(playerData.position.x, playerData.position.y, playerData.position.z);
+        //transform.position = data.cameraPositionData.position;
     }
 
     public void SaveData(GameData data)
     {
-        data.cameraPositionData.position = transform.position;
+		data.cameraPositionData.position = new SerializableVector3(transform.position.x, transform.position.y, transform.position.z);
+        //data.cameraPositionData.position = transform.position;
     }
 }

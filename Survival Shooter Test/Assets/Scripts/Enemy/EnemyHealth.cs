@@ -86,8 +86,10 @@ public class EnemyHealth : MonoBehaviour
         {
             currentHealth = this.currentHealth,
             id = enemyId,
-            position = transform.position,
-            rotation = transform.rotation
+            position = new SerializableVector3(transform.position.x, transform.position.y, transform.position.z),
+            rotation = new SerializableVector3(transform.rotation.x, transform.rotation.y, transform.rotation.z)
+            //position = transform.position,
+            //rotation = transform.rotation
         };
     }
 }

@@ -59,13 +59,14 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-		transform.position = data.playerMovementData.position;
-		transform.rotation = data.playerMovementData.rotation;
+		var playerData = data.playerMovementData;
+		transform.position = new Vector3(playerData.position.x, playerData.position.y, playerData.position.z);
+		transform.rotation = Quaternion.Euler(playerData.rotation.x, playerData.rotation.y, playerData.rotation.z);
 	}
 
 	public void SaveData(GameData data)
 	{
-		data.playerMovementData.position = transform.position;
-		data.playerMovementData.rotation = transform.rotation;
-	}
+        data.playerMovementData.position = new SerializableVector3(transform.position.x, transform.position.y, transform.position.z);
+        data.playerMovementData.rotation = new SerializableVector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+    }
 }

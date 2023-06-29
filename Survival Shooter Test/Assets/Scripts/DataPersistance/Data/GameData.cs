@@ -35,40 +35,51 @@ public class PlayerHealthData
 [Serializable]
 public class PlayerMovementData
 {
-    public Vector3 position;
-    public Quaternion rotation;
+    public SerializableVector3 position;
+    public SerializableVector3 rotation;
+    //public Vector3 position;
+    //public Quaternion rotation;
 
     public PlayerMovementData()
     {
-        position = Vector3.zero;
-        rotation = Quaternion.identity;
+        position = new SerializableVector3();
+        rotation = new SerializableVector3();
+        //position = Vector3.zero;
+        //rotation = Quaternion.identity;
     }    
 }
 
 [Serializable]
 public class CameraPositionData
 {
-    public Vector3 position;
+    public SerializableVector3 position;
+    //public Vector3 position;
     
     public CameraPositionData()
     {
-        position = new Vector3(1, 15, -22);
+        position = new SerializableVector3(1, 15, -22);
+        //position = new Vector3(1, 15, -22);
     }    
 }
 
 
+
 [Serializable]
-public class EnemyData
+public class EnemyEntity
 {
-    //public EnemyType enemyType;
-    public Vector3 position;
-    public Quaternion rotation;
+    public int id;
+    public SerializableVector3 position;
+    public SerializableVector3 rotation;
+    //public Vector3 position;
+    //public Quaternion rotation;
     public int currentHealth;
 
-    public EnemyData()
+    public EnemyEntity()
     {
-        position = Vector3.zero;
-        rotation = Quaternion.identity;
+        position = new SerializableVector3();
+        rotation = new SerializableVector3();
+        //position = Vector3.zero;
+        //rotation = Quaternion.identity;
         currentHealth = 100;
     }
 }
@@ -79,4 +90,16 @@ public class SerializableVector3
     public float x;
     public float y;
     public float z;
+    
+    public SerializableVector3()
+    {
+        x = y = z = 0;
+    }
+
+    public SerializableVector3(float x, float y, float z)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }

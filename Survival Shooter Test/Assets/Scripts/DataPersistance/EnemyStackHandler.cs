@@ -27,18 +27,14 @@ public class EnemyStackHandler : MonoBehaviour
         enemy = entity;
     }
 
+    public void UpdateEntity(EnemyType type, List<EnemyEntity> entities)
+    {
+        enemyStackDict[type] = entities;
+    }
+
     public List<EnemyEntity> FetchEntites(EnemyType type)
     {
         if (!enemyStackDict.ContainsKey(type)) return null;
         return enemyStackDict[type];
     }
-}
-
-[Serializable]
-public class EnemyEntity
-{
-    public int id;
-    public Vector3 position;
-    public Quaternion rotation;
-    public int currentHealth;
 }
